@@ -1,5 +1,3 @@
-Of course. Here is the final `README.md` with the correct repository URL.
-
 # Vutrium - Rocket League SDK & Bot Bridge
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
