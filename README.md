@@ -9,39 +9,39 @@
 
 Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that provides real-time game data access, visual overlays, and serves as a high-performance bridge to external Python bot clients. This project enables developers to create sophisticated bots and analysis tools by exposing Rocket League's internal game state through a clean, modern C++ API.
 
-## ⚡ Key Features
+## ⚡ Key Features *(When They Work)*
 
-### 🎯 **Complete Game State Access**
-- **Real-time Ball Data**: Position, velocity, angular velocity, and physics state
-- **Car Information**: All players' positions, rotations, velocities, boost amounts, and input states
-- **Match State**: Game time, score, team information, and round status
-- **Boost Pad Tracking**: Live monitoring of boost pad states with respawn timers
+### 🎯 **Game State Access** *(Partially Functional)*
+- **Real-time Ball Data**: Position, velocity, angular velocity *(mostly reliable)*
+- **Car Information**: Player positions, rotations, velocities *(hit or miss)*
+- **Match State**: Game time, score, team information *(inconsistent)*
+- **Boost Pad Tracking**: Live monitoring with respawn timers *(often broken)*
 
-### 🔧 **Advanced Memory Management**
-- **Unreal Engine Integration**: Direct access to `GObjects` and `GNames` tables
-- **Type-Safe Wrappers**: C++ object wrappers for game entities (`AGameEvent`, `ACar`, `ABall`, `APRI`)
-- **Robust Memory Reading**: Safe memory access with automatic error handling
-- **Pattern Scanning**: Automatic offset resolution across game updates
+### 🔧 **Memory Management** *(Needs Work)*
+- **Unreal Engine Integration**: Access to `GObjects` and `GNames` tables *(when pattern scanning works)*
+- **Type-Safe Wrappers**: C++ object wrappers *(implementation is messy)*
+- **Memory Reading**: Basic memory access *(lacks proper error handling)*
+- **Pattern Scanning**: Automatic offset resolution *(frequently fails on updates)*
 
-### 🎨 **Visual Overlays (ESP)**
-- **Ball Prediction**: 3D trajectory visualization with collision detection
-- **Car Hitboxes**: Real-time hitbox rendering for all vehicles
-- **Velocity Indicators**: 3D arrows showing movement direction and speed
-- **Boost Visualization**: Circular indicators showing boost amounts above cars
-- **Team-Colored Elements**: Automatic team color detection for enhanced visibility
-- **Boost Pad Timers**: Countdown displays for boost pad respawn times
+### 🎨 **Visual Overlays** *(Very Unstable)*
+- **Ball Prediction**: 3D trajectory visualization *(calculations may be wrong)*
+- **Car Hitboxes**: Hitbox rendering *(often doesn't appear)*
+- **Velocity Indicators**: Movement arrows *(positioning issues)*
+- **Boost Visualization**: Boost indicators *(colors often incorrect)*
+- **Team-Colored Elements**: Team color detection *(unreliable)*
+- **Boost Pad Timers**: Countdown displays *(timing is off)*
 
-### 🌐 **High-Performance Networking**
-- **TCP Bridge**: Lightweight localhost server for bot communication
-- **JSON Protocol**: Structured data exchange with external clients
-- **Real-time Updates**: Sub-millisecond latency for competitive applications
-- **Configurable Settings**: Runtime adjustment of bot parameters
+### 🌐 **Networking** *(Sometimes Works)*
+- **TCP Bridge**: Localhost server *(connection drops frequently)*
+- **JSON Protocol**: Data exchange *(formatting inconsistencies)*
+- **Real-time Updates**: Low latency *(when it doesn't crash)*
+- **Settings**: Runtime adjustment *(many settings don't actually work)*
 
-### 🔩 **Advanced Function Hooking**
-- **MinHook Integration**: Safe and reliable function interception
-- **ProcessEvent Hooking**: Comprehensive event system integration
-- **DirectX 11 Rendering**: ImGui-based overlay system using Kiero
-- **Event-Driven Architecture**: Pub/sub system for extensible functionality
+### 🔩 **Function Hooking** *(Major Issues)*
+- **MinHook Integration**: Function interception *(many hooks fail to install)*
+- **ProcessEvent Hooking**: Event system integration *(very unreliable)*
+- **DirectX 11 Rendering**: ImGui overlays *(often crashes)*
+- **Event System**: Pub/sub architecture *(events may not fire)*
 
 ## 🏗️ Architecture
 
@@ -81,7 +81,7 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 **This codebase is currently in a rough state and should be considered experimental:**
 
 - 🔴 **Code Quality**: The code is admittedly messy, poorly organized, and lacks proper documentation
-- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently or dont work at all
+- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently
 - 🔴 **Memory Management**: While functional, the memory reading implementation needs significant cleanup
 - 🔴 **Error Handling**: Insufficient error handling in many critical sections
 - 🔴 **Architecture**: The overall architecture could be significantly improved
@@ -111,9 +111,9 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 ### Dependencies
 
 ```bash
-# Install required packages via vcpkg
-vcpkg install curl:x64-windows
-vcpkg install nlohmann-json:x64-windows
+# Install required packages via vcpkg (STATIC linking required for DLL injection)
+vcpkg install curl:x64-windows-static
+vcpkg install nlohmann-json:x64-windows-static
 ```
 
 **Included Dependencies:**
@@ -133,15 +133,102 @@ vcpkg install nlohmann-json:x64-windows
    ```bash
    vcpkg integrate install
    ```
+   
+   **Note**: If you have multiple vcpkg installations or toolchains, you may need to:
+   ```bash
+   # Remove existing integration first
+   vcpkg integrate remove
+   
+   # Then re-integrate from your specific vcpkg directory
+   cd C:\your\vcpkg\directory
+   vcpkg integrate install
+   ```
 
-3. **Build the project:**
+3. **⚠️ CRITICAL: Manual vcpkg Path Configuration**
+   
+   **You MUST manually edit the project file to point to your vcpkg static installation:**
+   
+   - Open `Vutrium.vcxproj` in a text editor
+   - Find the line containing `<VcpkgTriplet>` 
+   - Change it to: `<VcpkgTriplet>x64-windows-static</VcpkgTriplet>`
+   - Find any `<AdditionalLibraryDirectories>` sections
+   - Update the vcpkg paths to point to your actual vcpkg installation directory
+   - Example path format: `C:\vcpkg\installed\x64-windows-static\lib`
+   - **Also check Runtime Library setting**: Project Properties → C/C++ → Code Generation → Runtime Library
+   - **Should be set to**: `Multi-threaded (/MT)` for Release or `Multi-threaded Debug (/MTd)` for Debug
+   
+   **If the project file doesn't have these entries, you may need to add them manually in the PropertySheets or project settings.**
+
+4. **Build the project:**
    ```bash
    # Open Vutrium.sln in Visual Studio
-   # Select Release + x64 configuration
+   # Select Release + x64 configuration  
+   # Verify that vcpkg static libraries are being linked (check Project Properties > Linker > Input)
    # Build Solution (Ctrl+Shift+B)
    ```
 
-4. **Output:** The compiled `Vutrium.dll` will be in `x64/Release/`
+5. **Output:** The compiled `Vutrium.dll` will be in `x64/Release/`
+
+6. **⚠️ Verify Static Linking (IMPORTANT):**
+   ```bash
+   # Use Dependency Walker, dumpbin, or similar tool to check dependencies
+   dumpbin /dependents x64\Release\Vutrium.dll
+   
+   # Should ONLY show system DLLs like:
+   # - KERNEL32.dll
+   # - USER32.dll  
+   # - ADVAPI32.dll
+   # - etc.
+   
+   # Should NOT show:
+   # - vcruntime140.dll (if using /MT)
+   # - msvcp140.dll (if using /MT)
+   # - Any curl or json DLLs
+   ```
+   
+   **If you see extra dependencies, your static linking failed and injection will not work.**
+
+### 🔧 **Why Static Linking?**
+
+Static linking is **essential** for DLL injection projects because:
+- **No external dependencies** - The injected DLL won't require additional runtime libraries
+- **Compatibility** - Avoids conflicts with the target process's existing libraries  
+- **Reliability** - Reduces the chance of missing DLL errors during injection
+- **Self-contained** - Everything needed is embedded in the single DLL file
+
+**If you use dynamic linking, the injection will likely fail with missing DLL errors.**
+
+### 🚨 **Common Build Issues & Solutions**
+
+**Problem: "Cannot find vcpkg libraries"**
+```
+Solution: Verify your vcpkg paths in the .vcxproj file match your actual installation
+- Check: Tools → Options → Projects and Solutions → Debugging → Path variables
+- Ensure VCPKG_ROOT environment variable is set correctly
+```
+
+**Problem: "LNK2019: unresolved external symbol" errors**
+```
+Solution: 
+1. Make sure you're using x64-windows-static triplet
+2. Check Project Properties → Linker → Input → Additional Dependencies
+3. Verify the .lib files exist in: [vcpkg_root]\installed\x64-windows-static\lib\
+```
+
+**Problem: "The application was unable to start correctly (0xc000007b)"**
+```
+Solution: You're probably linking dynamically instead of statically
+- Double-check the vcpkg triplet is set to x64-windows-static
+- Rebuild completely after changing triplet
+```
+
+**Problem: DLL injection fails with "module not found" errors**
+```
+Solution: 
+- Use Dependency Walker or similar to check for missing DLLs
+- Ensure ALL dependencies are statically linked
+- Consider using MT (Multi-threaded) runtime instead of MD (Multi-threaded DLL)
+```
 
 ## 🚀 Usage
 
@@ -340,6 +427,6 @@ This ensures that improvements to the codebase remain available to the community
 
 <div align="center">
 
-**⚡ Built with performance and reliability in mind ⚡**
+**⚡ Built with bad performance and broken hooks in mind ⚡**
 
 </div>
