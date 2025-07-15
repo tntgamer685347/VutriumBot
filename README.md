@@ -60,8 +60,9 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
         └──── JSON Data Exchange ──────────────────────────┘
 ```
 
-## ⚠️ **Important: Bot Client Required**
+## ⚠️ **Important Disclaimers**
 
+### **Bot Client Required**
 **This repository contains ONLY the C++ DLL component.** Vutrium acts as a bridge and data provider, but requires a separate Python bot client to function as an actual bot.
 
 **What this project provides:**
@@ -74,6 +75,30 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 - ❌ Bot logic and decision making (Python client)
 - ❌ Controller input simulation
 - ❌ Machine learning models
+
+### **🚨 Current State & Code Quality Warning**
+
+**This codebase is currently in a rough state and should be considered experimental:**
+
+- 🔴 **Code Quality**: The code is admittedly messy, poorly organized, and lacks proper documentation
+- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently
+- 🔴 **Memory Management**: While functional, the memory reading implementation needs significant cleanup
+- 🔴 **Error Handling**: Insufficient error handling in many critical sections
+- 🔴 **Architecture**: The overall architecture could be significantly improved
+
+**Known Issues:**
+- Function hooks may fail to initialize properly
+- Some ESP features may not render correctly
+- TCP bridge can be unreliable under certain conditions
+- Memory access patterns may cause crashes in some scenarios
+- Pattern scanning may fail on newer game versions
+
+**This project is shared primarily for:**
+- 📚 **Educational purposes** - Learning about game hacking techniques
+- 🔧 **Reference implementation** - Base for building better tools
+- 🤝 **Community contribution** - Hoping others can improve upon it
+
+**If you're looking for a production-ready solution, this isn't it (yet).** Consider this a starting point that needs significant work to be reliable.
 
 ## 🛠️ Building the Project
 
@@ -120,7 +145,7 @@ vcpkg install nlohmann-json:x64-windows
 
 ## 🚀 Usage
 
-### Quick Start
+### Quick Start (Your Mileage May Vary)
 
 1. **Launch Rocket League** and enter a match
 2. **Inject the DLL** using your preferred DLL injector:
@@ -128,8 +153,17 @@ vcpkg install nlohmann-json:x64-windows
    # Example with a command-line injector
    injector.exe RocketLeague.exe Vutrium.dll
    ```
+   **⚠️ Warning**: Injection may fail or cause crashes depending on game state
 3. **Start your Python bot client** (connects automatically to `localhost:13337`)
+   - *If TCP bridge doesn't work, check the console for errors*
 4. **Access the menu** by pressing `INSERT` in-game
+   - *Menu may not appear if hooks failed to initialize*
+
+**Troubleshooting Common Issues:**
+- If nothing happens after injection → Check if hooks initialized (console output)
+- If game crashes → Try injecting at a different time (main menu vs in-game)
+- If overlays don't show → DirectX hook probably failed
+- If TCP connection fails → Check Windows Firewall and antivirus
 
 ### Configuration
 
@@ -164,10 +198,13 @@ while True:
 
 ## 📊 Performance
 
+**Current performance characteristics (when it works):**
 - **Memory footprint**: ~2MB injected DLL
-- **CPU overhead**: <1% additional load
-- **Network latency**: <1ms localhost communication
-- **Frame rate impact**: Negligible when overlays disabled
+- **CPU overhead**: <1% additional load (varies significantly)
+- **Network latency**: <1ms localhost communication (when stable)
+- **Frame rate impact**: Negligible when overlays disabled, noticeable when enabled
+
+**⚠️ Note**: Performance can be inconsistent due to the current implementation issues. Expect potential stutters, crashes, and memory leaks during extended use.
 
 ## 🔍 Supported Game Versions
 
@@ -221,21 +258,40 @@ sdk.Subscribe(EventType::OnBoostPadStateChanged, [](const EventData& data) {
 
 ## 🛡️ Safety & Detection
 
-- **Memory-safe operations** with bounds checking
-- **No permanent game modifications** - injected code only
-- **Graceful error handling** prevents game crashes
-- **Clean unloading** via in-game eject button
+**Intended safety features (implementation varies):**
+- **Memory-safe operations** with bounds checking *(needs improvement)*
+- **No permanent game modifications** - injected code only *(when it works)*
+- **Graceful error handling** prevents game crashes *(often fails)*
+- **Clean unloading** via in-game eject button *(sometimes crashes)*
+
+**⚠️ Reality Check**: The current implementation may cause game instability, crashes, or other issues. Use at your own risk and save your game progress frequently. The "safety" features are aspirational rather than guaranteed.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+**We desperately need help!** This codebase has significant issues that need addressing:
 
-### Development Setup
+### **Priority Areas for Improvement:**
+1. **🔧 Fix Function Hooks** - Many hooks are broken or unreliable
+2. **🧹 Code Cleanup** - Refactor messy sections and improve organization  
+3. **🛡️ Memory Safety** - Better error handling and bounds checking
+4. **📚 Documentation** - Add proper comments and API documentation
+5. **🏗️ Architecture** - Redesign core systems for better maintainability
+6. **🐛 Bug Fixes** - Address crashes and stability issues
 
+### **How to Contribute:**
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes and test thoroughly
-4. Submit a pull request with a clear description
+2. Pick an issue from the **Priority Areas** above
+3. Create a feature branch: `git checkout -b fix/hook-reliability`
+4. **Test thoroughly** - The code is fragile, so extensive testing is crucial
+5. Submit a pull request with detailed explanation of changes
+
+**Even small improvements are welcome!** Whether it's fixing a memory leak, improving error messages, or adding comments - every bit helps make this project more usable.
+
+### **For New Contributors:**
+- Don't be intimidated by the messy code - we know it's bad!
+- Focus on one small area at a time
+- Ask questions in issues if you're unsure about anything
+- Consider this a learning opportunity in "how not to structure a project" 😅
 
 ## 📄 License
 
