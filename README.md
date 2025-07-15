@@ -81,7 +81,7 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 **This codebase is currently in a rough state and should be considered experimental:**
 
 - 🔴 **Code Quality**: The code is admittedly messy, poorly organized, and lacks proper documentation
-- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently
+- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently or dont work at all
 - 🔴 **Memory Management**: While functional, the memory reading implementation needs significant cleanup
 - 🔴 **Error Handling**: Insufficient error handling in many critical sections
 - 🔴 **Architecture**: The overall architecture could be significantly improved
