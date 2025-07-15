@@ -23,19 +23,19 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 - **Memory Reading**: Basic memory access *(lacks proper error handling)*
 - **Pattern Scanning**: Automatic offset resolution *(frequently fails on updates)*
 
-### 🎨 **Visual Overlays** *(Very Unstable)*
-- **Ball Prediction**: 3D trajectory visualization *(calculations may be wrong)*
-- **Car Hitboxes**: Hitbox rendering *(often doesn't appear)*
-- **Velocity Indicators**: Movement arrows *(positioning issues)*
-- **Boost Visualization**: Boost indicators *(colors often incorrect)*
-- **Team-Colored Elements**: Team color detection *(unreliable)*
-- **Boost Pad Timers**: Countdown displays *(timing is off)*
+### 🎨 **Visual Overlays** *(Mostly Working)*
+- **Ball Prediction**: 3D trajectory visualization *(functional)*
+- **Car Hitboxes**: Hitbox rendering *(works reliably)*
+- **Velocity Indicators**: Movement arrows *(working)*
+- **Boost Visualization**: Boost indicators *(functional)*
+- **Team-Colored Elements**: Team color detection *(working)*
+- **Boost Pad Timers**: Countdown displays *(currently broken)*
 
-### 🌐 **Networking** *(Sometimes Works)*
-- **TCP Bridge**: Localhost server *(connection drops frequently)*
-- **JSON Protocol**: Data exchange *(formatting inconsistencies)*
-- **Real-time Updates**: Low latency *(when it doesn't crash)*
-- **Settings**: Runtime adjustment *(many settings don't actually work)*
+### 🌐 **Networking** *(Functional)*
+- **TCP Bridge**: Localhost server *(working reliably)*
+- **JSON Protocol**: Data exchange *(functional)*
+- **Real-time Updates**: Low latency *(operational)*
+- **Settings**: Runtime adjustment *(most settings work)*
 
 ### 🔩 **Function Hooking** *(Major Issues)*
 - **MinHook Integration**: Function interception *(many hooks fail to install)*
@@ -242,23 +242,25 @@ Solution:
    ```
    **⚠️ Warning**: Injection may fail or cause crashes depending on game state
 3. **Start your Python bot client** (connects automatically to `localhost:13337`)
-   - *If TCP bridge doesn't work, check the console for errors*
+   - *TCP bridge generally works reliably*
 4. **Access the menu** by pressing `INSERT` in-game
-   - *Menu may not appear if hooks failed to initialize*
+   - *Menu should appear if hooks initialized properly*
 
 **Troubleshooting Common Issues:**
 - If nothing happens after injection → Check if hooks initialized (console output)
 - If game crashes → Try injecting at a different time (main menu vs in-game)
-- If overlays don't show → DirectX hook probably failed
+- If only some overlays show → Some ESP features work, boost pad timers are broken
 - If TCP connection fails → Check Windows Firewall and antivirus
 
 ### Configuration
 
 The in-game menu provides access to:
-- **Visual settings** - Toggle ESP features and adjust colors
-- **Bot parameters** - Configure bot behavior and responsiveness  
-- **Connection status** - Monitor TCP bridge health
-- **Debug information** - Real-time game state display
+- **Visual settings** - Toggle ESP features and adjust colors *(most features work)*
+- **Bot parameters** - Configure bot behavior and responsiveness *(functional)*
+- **Connection status** - Monitor TCP bridge health *(working)*
+- **Debug information** - Real-time game state display *(operational)*
+
+**Note**: Boost pad timer visualization is currently not working, but other ESP features are functional.
 
 ### Python Client Integration
 
@@ -427,6 +429,6 @@ This ensures that improvements to the codebase remain available to the community
 
 <div align="center">
 
-**⚡ Built with bad performance and broken hooks in mind ⚡**
+**⚡ Built with bad performance and broken code in mind ⚡**
 
 </div>
