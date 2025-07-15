@@ -9,33 +9,76 @@
 
 Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that provides real-time game data access, visual overlays, and serves as a high-performance bridge to external Python bot clients. This project enables developers to create sophisticated bots and analysis tools by exposing Rocket League's internal game state through a clean, modern C++ API.
 
+## ⚠️ **Important Disclaimers**
+
+### **Bot Client Required**
+**This repository contains ONLY the C++ DLL component.** Vutrium acts as a bridge and data provider, but requires a separate Python bot client to function as an actual bot.
+
+**What this project provides:**
+- ✅ Real-time game data extraction *(100% accurate when GameEvent found)*
+- ✅ Visual overlays and ESP features *(all work except boost pad timers)*
+- ✅ TCP communication bridge *(mostly functional)*
+- ✅ Memory management and safety *(solid implementation)*
+- ❌ Boost pad tracking *(completely broken system)*
+
+**What you need separately:**
+- ❌ Bot logic and decision making (Python client)
+- ❌ Controller input simulation
+- ❌ Machine learning models
+
+### **🚨 Current State & Code Quality Warning**
+
+**This codebase is currently in a rough state and should be considered experimental:**
+
+- 🔴 **Code Quality**: The code is admittedly messy, poorly organized, and lacks proper documentation
+- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently
+- 🔴 **Memory Management**: While functional, the memory reading implementation needs significant cleanup
+- 🔴 **Error Handling**: Insufficient error handling in many critical sections
+- 🔴 **Architecture**: The overall architecture could be significantly improved
+
+**Known Issues:**
+- **Primary Issue**: Function hooks may fail to initialize properly, preventing GameEvent detection
+- **When GameEvent is found**: All core game state reading works perfectly (ball, cars, match data)
+- **Boost pad tracking**: Completely non-functional - the tracking system is broken
+- **Boost pad timers**: Don't work because the underlying tracking system is broken
+- **TCP bridge**: Can be unreliable under certain conditions
+- **Pattern scanning**: May fail on newer game versions requiring offset updates
+- **Hook reliability**: Main barrier to functionality - when hooks work, most features work
+
+**This project is shared primarily for:**
+- 📚 **Educational purposes** - Learning about game hacking techniques
+- 🔧 **Reference implementation** - Base for building better tools
+- 🤝 **Community contribution** - Hoping others can improve upon it
+
+**If you're looking for a production-ready solution, this isn't it (yet).** Consider this a starting point that needs significant work to be reliable.
+
 ## ⚡ Key Features *(When They Work)*
 
-### 🎯 **Game State Access** *(Partially Functional)*
-- **Real-time Ball Data**: Position, velocity, angular velocity *(mostly reliable)*
-- **Car Information**: Player positions, rotations, velocities *(hit or miss)*
-- **Match State**: Game time, score, team information *(inconsistent)*
-- **Boost Pad Tracking**: Live monitoring with respawn timers *(often broken)*
+### 🎯 **Game State Access** *(Reliable When GameEvent Found)*
+- **Real-time Ball Data**: Position, velocity, angular velocity *(100% functional)*
+- **Car Information**: Player positions, rotations, velocities, boost amounts *(100% functional)*
+- **Match State**: Game time, score, team information *(100% functional)*
+- **Boost Pad Tracking**: Live monitoring with respawn timers *(completely broken)*
 
-### 🔧 **Memory Management** *(Needs Work)*
-- **Unreal Engine Integration**: Access to `GObjects` and `GNames` tables *(when pattern scanning works)*
-- **Type-Safe Wrappers**: C++ object wrappers *(implementation is messy)*
-- **Memory Reading**: Basic memory access *(lacks proper error handling)*
-- **Pattern Scanning**: Automatic offset resolution *(frequently fails on updates)*
+### 🔧 **Memory Management** *(Solid When Initialized)*
+- **Unreal Engine Integration**: Access to `GObjects` and `GNames` tables *(reliable when pattern scanning works)*
+- **Type-Safe Wrappers**: C++ object wrappers *(functional, but code is messy)*
+- **Memory Reading**: Game state access *(100% accurate when GameEvent is found)*
+- **Pattern Scanning**: Automatic offset resolution *(works but may fail on major updates)*
 
-### 🎨 **Visual Overlays** *(Mostly Working)*
-- **Ball Prediction**: 3D trajectory visualization *(functional)*
-- **Car Hitboxes**: Hitbox rendering *(works reliably)*
+### 🎨 **Visual Overlays** *(Mostly Functional)*
+- **Ball Prediction**: 3D trajectory visualization *(works well)*
+- **Car Hitboxes**: Hitbox rendering *(functional)*
 - **Velocity Indicators**: Movement arrows *(working)*
-- **Boost Visualization**: Boost indicators *(functional)*
-- **Team-Colored Elements**: Team color detection *(working)*
-- **Boost Pad Timers**: Countdown displays *(currently broken)*
+- **Boost Visualization**: Boost indicators above cars *(working)*
+- **Team-Colored Elements**: Team color detection *(functional)*
+- **Boost Pad Timers**: Countdown displays *(completely broken - don't use)*
 
-### 🌐 **Networking** *(Functional)*
-- **TCP Bridge**: Localhost server *(working reliably)*
-- **JSON Protocol**: Data exchange *(functional)*
-- **Real-time Updates**: Low latency *(operational)*
-- **Settings**: Runtime adjustment *(most settings work)*
+### 🌐 **Networking** *(Sometimes Works)*
+- **TCP Bridge**: Localhost server *(connection drops frequently)*
+- **JSON Protocol**: Data exchange *(formatting inconsistencies)*
+- **Real-time Updates**: Low latency *(when it doesn't crash)*
+- **Settings**: Runtime adjustment *(many settings don't actually work)*
 
 ### 🔩 **Function Hooking** *(Major Issues)*
 - **MinHook Integration**: Function interception *(many hooks fail to install)*
@@ -59,46 +102,6 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
         │                                                │
         └──── JSON Data Exchange ──────────────────────────┘
 ```
-
-## ⚠️ **Important Disclaimers**
-
-### **Bot Client Required**
-**This repository contains ONLY the C++ DLL component.** Vutrium acts as a bridge and data provider, but requires a separate Python bot client to function as an actual bot.
-
-**What this project provides:**
-- ✅ Real-time game data extraction
-- ✅ Visual overlays and ESP features  
-- ✅ TCP communication bridge
-- ✅ Memory management and safety
-
-**What you need separately:**
-- ❌ Bot logic and decision making (Python client)
-- ❌ Controller input simulation
-- ❌ Machine learning models
-
-### **🚨 Current State & Code Quality Warning**
-
-**This codebase is currently in a rough state and should be considered experimental:**
-
-- 🔴 **Code Quality**: The code is admittedly messy, poorly organized, and lacks proper documentation
-- 🔴 **Hook Reliability**: Many of the function hooks are unstable and don't work consistently
-- 🔴 **Memory Management**: While functional, the memory reading implementation needs significant cleanup
-- 🔴 **Error Handling**: Insufficient error handling in many critical sections
-- 🔴 **Architecture**: The overall architecture could be significantly improved
-
-**Known Issues:**
-- Function hooks may fail to initialize properly
-- Some ESP features may not render correctly
-- TCP bridge can be unreliable under certain conditions
-- Memory access patterns may cause crashes in some scenarios
-- Pattern scanning may fail on newer game versions
-
-**This project is shared primarily for:**
-- 📚 **Educational purposes** - Learning about game hacking techniques
-- 🔧 **Reference implementation** - Base for building better tools
-- 🤝 **Community contribution** - Hoping others can improve upon it
-
-**If you're looking for a production-ready solution, this isn't it (yet).** Consider this a starting point that needs significant work to be reliable.
 
 ## 🛠️ Building the Project
 
@@ -242,25 +245,25 @@ Solution:
    ```
    **⚠️ Warning**: Injection may fail or cause crashes depending on game state
 3. **Start your Python bot client** (connects automatically to `localhost:13337`)
-   - *TCP bridge generally works reliably*
+   - *If TCP bridge doesn't work, check the console for errors*
 4. **Access the menu** by pressing `INSERT` in-game
-   - *Menu should appear if hooks initialized properly*
+   - *Menu may not appear if hooks failed to initialize*
 
 **Troubleshooting Common Issues:**
-- If nothing happens after injection → Check if hooks initialized (console output)
-- If game crashes → Try injecting at a different time (main menu vs in-game)
-- If only some overlays show → Some ESP features work, boost pad timers are broken
-- If TCP connection fails → Check Windows Firewall and antivirus
+- **If nothing happens after injection** → Check console output for hook initialization status
+- **If game crashes** → Try injecting at different times (main menu vs in-game vs mid-match)
+- **If overlays don't show** → DirectX hook failed, try different injection timing
+- **If TCP connection fails** → Check Windows Firewall and antivirus
+- **If GameEvent detection works** → Most features should work properly (except boost pads)
+- **If you see "GameEvent Found" in console** → Core functionality should be 100% operational
 
 ### Configuration
 
 The in-game menu provides access to:
-- **Visual settings** - Toggle ESP features and adjust colors *(most features work)*
-- **Bot parameters** - Configure bot behavior and responsiveness *(functional)*
-- **Connection status** - Monitor TCP bridge health *(working)*
-- **Debug information** - Real-time game state display *(operational)*
-
-**Note**: Boost pad timer visualization is currently not working, but other ESP features are functional.
+- **Visual settings** - Toggle ESP features and adjust colors
+- **Bot parameters** - Configure bot behavior and responsiveness  
+- **Connection status** - Monitor TCP bridge health
+- **Debug information** - Real-time game state display
 
 ### Python Client Integration
 
@@ -360,12 +363,17 @@ sdk.Subscribe(EventType::OnBoostPadStateChanged, [](const EventData& data) {
 **We desperately need help!** This codebase has significant issues that need addressing:
 
 ### **Priority Areas for Improvement:**
-1. **🔧 Fix Function Hooks** - Many hooks are broken or unreliable
-2. **🧹 Code Cleanup** - Refactor messy sections and improve organization  
-3. **🛡️ Memory Safety** - Better error handling and bounds checking
-4. **📚 Documentation** - Add proper comments and API documentation
-5. **🏗️ Architecture** - Redesign core systems for better maintainability
-6. **🐛 Bug Fixes** - Address crashes and stability issues
+1. **🔧 Fix Function Hook Reliability** - The main blocker preventing GameEvent detection
+2. **🎯 Fix Boost Pad Tracking System** - Completely broken, needs rewrite
+3. **🧹 Code Cleanup** - Refactor messy sections and improve organization  
+4. **🛡️ TCP Bridge Stability** - Improve connection reliability
+5. **📚 Documentation** - Add proper comments and API documentation
+6. **🏗️ Architecture** - Redesign core systems for better maintainability
+
+**Good News**: Once GameEvent detection works, most core functionality is solid! The main issues are:
+- Getting the hooks to work reliably (biggest barrier)
+- The boost pad tracking system being completely broken
+- General code organization and stability
 
 ### **How to Contribute:**
 1. Fork the repository
