@@ -605,7 +605,7 @@ namespace SDK
         static constexpr uintptr_t Offset_ConsumptionRate = 0x0300; // float
         static constexpr uintptr_t Offset_MaxAmount = 0x0304; // float
         static constexpr uintptr_t Offset_StartAmount = 0x0308; // float
-        static constexpr uintptr_t Offset_CurrentAmount = 0x0318; // float (ReplicatedBoostAmount)
+        static constexpr uintptr_t Offset_CurrentAmount = 0x0330; // float (ReplicatedBoostAmount)
         // Size: 0x0368
 
         explicit UBoostComponent(uintptr_t address = 0) : UObject(address) {}
