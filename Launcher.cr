@@ -8,14 +8,14 @@
 	"NewsUrl": "https://www.rocketleague.com/en/news/",
 	"ModuleUrl": "https://github.com/tntgamer685347/VutriumBot/releases/download/Download/Vutrium.dll",
 	"LauncherChangelog": "Created this launcher based of the CodeRed Launcher available Here: https://github.com/CodeRedModding/CodeRed-Launcher",
-	"LauncherVersion": "1.4.4",
+	"LauncherVersion": "1.0.0",
 	"LauncherUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedLauncher.zip",
 	"ModuleChangelog": "Visuals\nBoost timers: See when pads reactivate in real-time\nCar ESP: Precise hitboxes for every player\nController overlay: Display bot and human inputs\nChat\nAI responder: Defend against bot accusations\nToxicity guard: Auto responses to toxic behavior\nHuman-like: Natural conversation patterns\nBot\nNexto integration: Neural network processing\nAuto queue: Automated matchmaking\nDiscord logs: Game stats via webhook\nSplitscreen: Multiple bots per instance",
 	"DropperUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedDropper.zip",
 	"LauncherAlt": "null",
 	"AltEndpoint": "false",
-	"DiscordUrl": "https://discord.gg/t4SjXjEhk3",
+	"DiscordUrl": "https://discord.gg/6qFa34HUqB",
 	"ModuleVersion": "1.0.0",
 	"Disclaimer": "Educational and experimental use only. Usage online may result in a ban. Proceed at your own risk. The developers are not responsible for any account bans or disciplinary actions taken by Psyonix or Epic Games. Use at your own risk.",
-	"KofiUrl": "None."
+	"KofiUrl": "https://ko-fi.com/flaryx32"
 }
