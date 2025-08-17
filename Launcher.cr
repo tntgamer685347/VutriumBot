@@ -1,0 +1,21 @@
+{
+	"signature": "299c4bfcf82767a34445ebeac7c55f6e03e1cc385fc7dc6525b0982fc06a81322fc3b37cc0128e74cecd7f6a20449f2a0176f97ee46ad11b96ec91973a44c643",
+	"Supporters": "Faded (❤ Donated a cursor account ❤)",
+	"Credits": "MarlBurrow, Flaryx32, Thorami, CodeRed (Made this launcher.)",
+	"WebsiteUrl": "https://needlesspage819.github.io/VutriumSite/",
+	"PsyonixVersion": "250721.67443.490872",
+	"UninstallerUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedUninstaller.zip",
+	"NewsUrl": "https://www.rocketleague.com/en/news/",
+	"ModuleUrl": "https://github.com/tntgamer685347/VutriumBot/releases/download/Download/Vutrium.dll",
+	"LauncherChangelog": "Created this launcher based of the CodeRed Launcher available Here: https://github.com/CodeRedModding/CodeRed-Launcher",
+	"LauncherVersion": "1.4.4",
+	"LauncherUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedLauncher.zip",
+	"ModuleChangelog": "Visuals\n\nBoost timers: See when pads reactivate in real-time\n\nCar ESP: Precise hitboxes for every player\n\nController overlay: Display bot and human inputs\n\nChat\n\nAI responder: Defend against bot accusations\n\nToxicity guard: Auto responses to toxic behavior\n\nHuman-like: Natural conversation patterns\n\nBot\n\nNexto integration: Neural network processing\n\nAuto queue: Automated matchmaking\n\nDiscord logs: Game stats via webhook\n\nSplitscreen: Multiple bots per instance",
+	"DropperUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedDropper.zip",
+	"LauncherAlt": "null",
+	"AltEndpoint": "false",
+	"DiscordUrl": "https://discord.gg/t4SjXjEhk3",
+	"ModuleVersion": "1.0.0",
+	"Disclaimer": "Educational and experimental use only. Usage online may result in a ban. Proceed at your own risk. The developers are not responsible for any account bans or disciplinary actions taken by Psyonix or Epic Games. Use at your own risk.",
+	"KofiUrl": "None."
+}
