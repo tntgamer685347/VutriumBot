@@ -1,6 +1,6 @@
 {
 	"signature": "299c4bfcf82767a34445ebeac7c55f6e03e1cc385fc7dc6525b0982fc06a81322fc3b37cc0128e74cecd7f6a20449f2a0176f97ee46ad11b96ec91973a44c643",
-	"Supporters": "Faded (❤ Donated a cursor account ❤)",
+	"Supporters": "Faded (❤ Donated a cursor account ❤), peakingbloom, Faded, Abstract, nmeyt, hidan_59951, duck, aware_02, Tochy, tntgamer0815",
 	"Credits": "MarlBurrow, Flaryx32, Thorami, CodeRed (Made this launcher.)",
 	"WebsiteUrl": "https://needlesspage819.github.io/VutriumSite/",
 	"PsyonixVersion": "250721.67443.490872",
@@ -18,4 +18,3 @@
 	"Disclaimer": "Educational and experimental use only. Usage online may result in a ban. Proceed at your own risk. The developers are not responsible for any account bans or disciplinary actions taken by Psyonix or Epic Games. Use at your own risk.",
 	"KofiUrl": "https://ko-fi.com/flaryx32"
 }
-
