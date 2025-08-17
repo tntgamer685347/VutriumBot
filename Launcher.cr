@@ -10,7 +10,7 @@
 	"LauncherChangelog": "Created this launcher based of the CodeRed Launcher available Here: https://github.com/CodeRedModding/CodeRed-Launcher",
 	"LauncherVersion": "1.4.4",
 	"LauncherUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedLauncher.zip",
-	"ModuleChangelog": "Visuals\n\nBoost timers: See when pads reactivate in real-time\n\nCar ESP: Precise hitboxes for every player\n\nController overlay: Display bot and human inputs\n\nChat\n\nAI responder: Defend against bot accusations\n\nToxicity guard: Auto responses to toxic behavior\n\nHuman-like: Natural conversation patterns\n\nBot\n\nNexto integration: Neural network processing\n\nAuto queue: Automated matchmaking\n\nDiscord logs: Game stats via webhook\n\nSplitscreen: Multiple bots per instance",
+	"ModuleChangelog": "Visuals\nBoost timers: See when pads reactivate in real-time\nCar ESP: Precise hitboxes for every player\nController overlay: Display bot and human inputs\nChat\nAI responder: Defend against bot accusations\nToxicity guard: Auto responses to toxic behavior\nHuman-like: Natural conversation patterns\nBot\nNexto integration: Neural network processing\nAuto queue: Automated matchmaking\nDiscord logs: Game stats via webhook\nSplitscreen: Multiple bots per instance",
 	"DropperUrl": "https://github.com/CodeRedModding/CodeRed-Launcher/releases/download/v2.7.2/CodeRedDropper.zip",
 	"LauncherAlt": "null",
 	"AltEndpoint": "false",
