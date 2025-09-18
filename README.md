@@ -13,7 +13,8 @@ Vutrium is a comprehensive C++ DLL-based SDK designed for Rocket League that pro
 
 ### **Bot Client Required**
 **This repository contains ONLY the C++ DLL component.** Vutrium acts as a bridge and data provider, but requires a separate Python bot client to function as an actual bot.
-**This bot is repository wont be updated anymore.
+
+**This bot is repository wont be updated anymore.**
 
 **What this project provides:**
 - ✅ Real-time game data extraction *(100% accurate when GameEvent found)*
