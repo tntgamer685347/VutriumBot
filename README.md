@@ -428,13 +428,6 @@ This ensures that improvements to the codebase remain available to the community
 - **Dear ImGui** - Immediate mode GUI
 - **Community Contributors** - For testing and feedback
 
-## 📞 Support & Contact
-
-- **Author**: tntgamer0815
-- **Discord**: `tntgamer0815`
-- **Email**: `tntgamer0815@gmail.com`
-- **Issues**: [GitHub Issues](https://github.com/yourusername/vutrium/issues)
-
 ---
 
 <div align="center">
